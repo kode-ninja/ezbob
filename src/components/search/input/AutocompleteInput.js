@@ -6,28 +6,14 @@ import Suggestions from "./suggestions/Suggestions";
 const AutocompleteInput = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
-    console.log('AutocompleteInput renders..');
-
-
-    const onInputChange = (searchTerm) => {
-        setSearchTerm(searchTerm);
-    }
-
-    const onInputFocus = () => {
-        setIsToShowSuggestions(true);
-    }
-
-    const onInputBlur = () => {
-        setIsToShowSuggestions(false);
-    }
 
     return (
         <div className="autocomplete">
             <SearchInput
                 value={searchTerm}
-                onChange={onInputChange}
-                onFocus={onInputFocus}
-                onBlur={onInputBlur}
+                onChange={searchTerm => setSearchTerm(searchTerm)}
+                onFocus={() => setIsToShowSuggestions(true)}
+                onBlur={() => setIsToShowSuggestions(false)}
             />
             <Suggestions searchTerm={searchTerm} isToShowSuggestions={isToShowSuggestions} />
         </div>
