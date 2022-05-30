@@ -2,7 +2,10 @@ import {searchResultEntries} from "../entriesDB";
 
 /**
  * Acts as a sort of API for fetching search results
- * (currently from the hardcoded entriesDB_
+ * (currently from the hardcoded entriesDB)
+ *
+ * TODO: Can also be implemented as a hook while functions are wrapped in useCallback
+ * to prevent re-rendering of client components
  */
 export const getTitlesByPrefix = (titlePrefix, maxNumOfTitles) => {
     let titles = [];
