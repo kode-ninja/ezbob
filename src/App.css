@@ -1,2 +1,27 @@
-.App {
+.autocomplete {
+    width: 20rem;
 }
+.autocomplete input.search {
+    width: 100%;
+    border-radius: 0.2rem;
+}
+
+.autocomplete .suggestions {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.suggestions .suggestion {
+    cursor: pointer;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+.suggestions .suggestion:hover {
+    background-color: lightgrey;
+}
+
+.suggestions .suggestion .suggestion-icon {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
