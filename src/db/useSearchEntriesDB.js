@@ -11,7 +11,7 @@ const useSearchEntriesDB = () => {
             return titles;
 
         for (const resultEntry of searchResultEntries) {
-            if (resultEntry.title.toLowerCase().indexOf(titlePrefix.toLowerCase()) === 0) {
+            if (resultEntry.title.toLowerCase().startsWith(titlePrefix.toLowerCase())) {
                 titles.push(resultEntry.title.toLowerCase());   // assuming suggestions should be lowercase, as in the requirement doc
                 if (titles.length === maxNumOfTitles)
                     return titles;
