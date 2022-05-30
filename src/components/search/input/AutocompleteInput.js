@@ -6,7 +6,6 @@ import useSearchEntriesDB from "../../../db/useSearchEntriesDB";
 const MAX_NUM_OF_SUGGESTIONS = 10;
 
 const AutocompleteInput = () => {
-    const [inputValue, setInputValue] = useState('');   // TODO: move into SearchInput?
     const [suggestions, setSuggestions] = useState([]);
     const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
     const {getTitlesByPrefix} = useSearchEntriesDB();
@@ -22,7 +21,6 @@ const AutocompleteInput = () => {
     }
 
     const onInputChange = (searchTerm) => {
-        setInputValue(searchTerm);
         updateSuggestions(searchTerm);
     }
 
@@ -37,7 +35,6 @@ const AutocompleteInput = () => {
     return (
         <div className="autocomplete">
             <SearchInput
-                value={inputValue}
                 onChange={onInputChange}
                 onFocus={onInputFocus}
                 onBlur={onInputBlur}
