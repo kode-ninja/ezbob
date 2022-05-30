@@ -4,7 +4,7 @@ import Suggestions from "./suggestions/Suggestions";
 
 
 const AutocompleteInput = () => {
-    const [searchTerm, setSearchTerm] = useState('');   // TODO: move into SearchInput?
+    const [searchTerm, setSearchTerm] = useState('');
     const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
     console.log('AutocompleteInput renders..');
 
