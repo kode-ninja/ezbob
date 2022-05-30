@@ -8,9 +8,11 @@ const MAX_NUM_OF_SUGGESTIONS = 10;
 const AutocompleteInput = () => {
     const [inputValue, setInputValue] = useState('');   // TODO: move into SearchInput?
     const [suggestions, setSuggestions] = useState([]);
+    const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
     const {getTitlesByPrefix} = useSearchEntriesDB();
 
     const updateSuggestions = (searchTerm) => {
+        console.log('AutocompleteInput.updateSuggestions()');//TODO: delete/debug
         const suggestedTitles = getTitlesByPrefix(searchTerm, MAX_NUM_OF_SUGGESTIONS);
         setSuggestions(suggestedTitles.map(suggestedTitle => (
             {
@@ -19,16 +21,30 @@ const AutocompleteInput = () => {
         )));
     }
 
-    const onInputChange = (e) => {
-        const searchTerm = e.target.value;
+    const onInputChange = (searchTerm) => {
         setInputValue(searchTerm);
         updateSuggestions(searchTerm);
     }
 
+    const onInputFocus = () => {
+        setIsToShowSuggestions(true);
+    }
+
+    const onInputBlur = () => {
+        setIsToShowSuggestions(false);
+    }
+
     return (
         <div className="autocomplete">
-            <SearchInput value={inputValue} onChange={onInputChange} />
-            <Suggestions suggestions={suggestions} />
+            <SearchInput
+                value={inputValue}
+                onChange={onInputChange}
+                onFocus={onInputFocus}
+                onBlur={onInputBlur}
+            />
+            {isToShowSuggestions && <Suggestions
+                suggestions={suggestions}
+            />}
         </div>
     );
 }
