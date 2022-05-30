@@ -5,12 +5,8 @@ import {useEffect, useRef} from "react";
 export const SearchInput = ({value, onChange, onFocus, onBlur}) => {
     const inputRef = useRef();
 
-    const focus = () => {
-        inputRef.current.focus();
-    }
-
     useEffect(() => {
-        focus();
+        inputRef.current.focus();
     }, []);
 
     return (
@@ -30,5 +26,5 @@ SearchInput.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     onFocus: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired
+    onBlur: PropTypes.func.isRequired,
 };
