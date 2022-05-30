@@ -1,26 +1,16 @@
 import {useState} from "react";
 import {SearchInput} from "./SearchInput";
 import Suggestions from "./suggestions/Suggestions";
-import useSearchEntriesDB from "../../../db/useSearchEntriesDB";
 
-const MAX_NUM_OF_SUGGESTIONS = 10;
 
 const AutocompleteInput = () => {
-    const [suggestions, setSuggestions] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');   // TODO: move into SearchInput?
     const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
-    const {getTitlesByPrefix} = useSearchEntriesDB();
+    console.log('AutocompleteInput renders..');
 
-    const updateSuggestions = (searchTerm) => {
-        const suggestedTitles = getTitlesByPrefix(searchTerm, MAX_NUM_OF_SUGGESTIONS);
-        setSuggestions(suggestedTitles.map(suggestedTitle => (
-            {
-                title: suggestedTitle
-            }
-        )));
-    }
 
     const onInputChange = (searchTerm) => {
-        updateSuggestions(searchTerm);
+        setSearchTerm(searchTerm);
     }
 
     const onInputFocus = () => {
@@ -34,13 +24,12 @@ const AutocompleteInput = () => {
     return (
         <div className="autocomplete">
             <SearchInput
+                value={searchTerm}
                 onChange={onInputChange}
                 onFocus={onInputFocus}
                 onBlur={onInputBlur}
             />
-            {isToShowSuggestions && <Suggestions
-                suggestions={suggestions}
-            />}
+            <Suggestions searchTerm={searchTerm} isToShowSuggestions={isToShowSuggestions} />
         </div>
     );
 }
