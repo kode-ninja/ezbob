@@ -3,7 +3,7 @@ import {useEffect, useRef, useState} from "react";
 
 
 export const SearchInput = ({onChange, onFocus, onBlur}) => {
-    const [value, setValue] = useState('');   // TODO: move into SearchInput?
+    const [value, setValue] = useState('');
     const inputRef = useRef();
 
     const focus = () => {

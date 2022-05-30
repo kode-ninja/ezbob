@@ -11,7 +11,6 @@ const AutocompleteInput = () => {
     const {getTitlesByPrefix} = useSearchEntriesDB();
 
     const updateSuggestions = (searchTerm) => {
-        console.log('AutocompleteInput.updateSuggestions()');//TODO: delete/debug
         const suggestedTitles = getTitlesByPrefix(searchTerm, MAX_NUM_OF_SUGGESTIONS);
         setSuggestions(suggestedTitles.map(suggestedTitle => (
             {
