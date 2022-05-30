@@ -10,6 +10,7 @@ const Suggestions = ({searchTerm, isToShowSuggestions}) => {
     // if input gains focus again.
     // Memoization depends on the search term - if it doesn't change, no need to re-calculate the suggestions
     const suggestions = useMemo(() => {
+        console.log('RECALCULATING')
         const suggestedTitles = getTitlesByPrefix(searchTerm, MAX_NUM_OF_SUGGESTIONS);
         return suggestedTitles.map((suggestedTitle, idx) => <Suggestion key={idx} title={suggestedTitle}/>);    // TODO: provide meaningful "key" or is it better, performance wise, to teardown and recreate the tree on render?
     }, [searchTerm]);
