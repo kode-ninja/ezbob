@@ -38,6 +38,9 @@
     height: auto;
     color: gray;
 }
+.suggestions .suggestion .title.in-history{
+    color: purple;
+}
 .suggestions .suggestion .remove {
     float: right;
     cursor: pointer;
