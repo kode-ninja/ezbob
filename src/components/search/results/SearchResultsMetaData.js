@@ -5,7 +5,7 @@ import {millisToSeconds} from "../../../common/millisToSeconds";
 const SearchResultsMetaData = ({executionTimeMS, numOfResults}) => {
     return (
         <div className="meta">
-            {numOfResults} results ({millisToSeconds(executionTimeMS)} seconds)
+            {numOfResults} result{numOfResults > 1 ? 's' : ''} ({millisToSeconds(executionTimeMS)} seconds)
         </div>
     );
 }
