@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useReducer} from "react";
-import {SearchInput} from "./SearchInput";
+import {Input} from "./Input";
 import Suggestions from "./suggestions/Suggestions";
 import {SearchPageContext} from "../SearchPage";
 
@@ -69,7 +69,7 @@ const AutocompleteInput = () => {
             }}
         >
             <form onSubmit={onSubmit} role="search">
-                <SearchInput
+                <Input
                     value={state.inputSearchTerm}
                     onChange={searchTerm => dispatch(createReducerAction(ACTION_INPUT_SEARCH_TERM_CHANGED, {searchTerm: searchTerm}))}
                 />

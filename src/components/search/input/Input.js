@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {useEffect, useRef} from "react";
 
 
-export const SearchInput = ({value, onChange}) => {
+export const Input = ({value, onChange}) => {
     const inputRef = useRef();
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export const SearchInput = ({value, onChange}) => {
     );
 }
 
-SearchInput.propTypes = {
+Input.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
 };
