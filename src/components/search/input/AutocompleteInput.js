@@ -68,7 +68,7 @@ const AutocompleteInput = () => {
                 }
             }}
         >
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} role="search">
                 <SearchInput
                     value={state.inputSearchTerm}
                     onChange={searchTerm => dispatch(createReducerAction(ACTION_INPUT_SEARCH_TERM_CHANGED, {searchTerm: searchTerm}))}
