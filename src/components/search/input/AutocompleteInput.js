@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import {SearchInput} from "./SearchInput";
 import Suggestions from "./suggestions/Suggestions";
 import {SearchPageContext} from "../SearchPage";
@@ -8,11 +8,23 @@ const AutocompleteInput = () => {
     const {searchTerm, submitSearch} = useContext(SearchPageContext);
     const [inputSearchTerm, setInputSearchTerm] = useState(searchTerm);
     const [isToShowSuggestions, setIsToShowSuggestions] = useState(false);
+    const isFirstSearchTermEffect = useRef(true);
 
     const onSubmit = (e) => {
         e.preventDefault();
         submitSearch(inputSearchTerm);
     }
+
+    // Close Suggestions on search (form submission)
+    useEffect(() => {
+        // listen only to "real" submissions
+        // not the initial render
+        if (!isFirstSearchTermEffect.current) {
+            setIsToShowSuggestions(false);
+        } else {
+            isFirstSearchTermEffect.current = false
+        }
+    }, [searchTerm]);
 
     return (
         <div
