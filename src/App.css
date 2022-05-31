@@ -1,8 +1,12 @@
+.page.search {
+    padding: 1rem;
+}
 .autocomplete {
     width: 20rem;
-    border: 1px solid gray;
-    border-radius: 0.2rem;
+    border: 1px solid lightgrey;
+    border-radius: 1rem;
     padding: 1rem;
+    box-shadow: 0 0 10px 0 lightgrey;
 }
 .autocomplete input.search {
     box-sizing: border-box;
@@ -40,4 +44,23 @@
     font-size: small;
     color: gray;
     padding-right: 0.4rem;
+}
+
+.results {
+    margin-top: 2rem;
+    border-top: 1px solid lightgrey;
+}
+
+.results .meta {
+    color: gray;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.results .result {
+    margin-top: 1rem;
+}
+
+.results .result .description {
+    margin-top: 0.3rem;
 }
