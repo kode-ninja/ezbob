@@ -8,6 +8,8 @@ const SearchResults = ({searchTerm}) => {
     const dbSearchResults = getSearchResults(searchTerm);
     const executionTimeMS = performance.now() - start;
 
+    if (dbSearchResults.length === 0)
+        return null;
 
     return (
         <div className="results">
