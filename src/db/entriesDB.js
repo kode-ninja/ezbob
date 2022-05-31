@@ -1,3 +1,7 @@
+/**
+ * Fake, hard coded, search results DB
+ */
+
 // a quick way to mock around with the search results DB
 const titles = [
     'React JS',
