@@ -1,11 +1,16 @@
 .autocomplete {
     width: 20rem;
+    border: 1px solid gray;
+    border-radius: 0.2rem;
+    padding: 1rem;
 }
 .autocomplete input.search {
+    box-sizing: border-box;
+    border: 0;
+    border-bottom: 1px solid lightgrey;
     width: 100%;
-    border-radius: 0.2rem;
+    height: 2rem;
 }
-
 .autocomplete .suggestions {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -24,4 +29,15 @@
     padding-left: 0.5rem;
     padding-right: 0.5rem;
 }
-
+.suggestions .suggestion .suggestion-icon svg {
+    width: 0.6rem;
+    height: auto;
+    color: gray;
+}
+.suggestions .suggestion .remove {
+    float: right;
+    cursor: pointer;
+    font-size: small;
+    color: gray;
+    padding-right: 0.4rem;
+}

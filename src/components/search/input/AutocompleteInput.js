@@ -10,20 +10,40 @@ const AutocompleteInput = () => {
     const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
     const searchHistory = useSearchHistory();
 
-    const onSearchSubmit = (e) => {
+    const onSearch = (e) => {
         e.preventDefault();
         searchHistory.push(searchTerm);
     }
 
     return (
-        <div className="autocomplete">
+        <div
+            className="autocomplete"
+            /**
+            * tabindex makes the div focusable
+            * which is required to manage onFocus and onBlur
+            * tabindex="0" means that the element should be focusable in sequential keyboard navigation
+            */
+            tabIndex={0}
+            onFocus={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget)) {
+                    // Not triggered when swapping focus between children
+                    console.log('focus entered self');
+                    setIsToShowSuggestions(true);
+                }
+            }}
+            onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget)) {
+                    // Not triggered when swapping focus between children
+                    console.log('focus left self');
+                    setIsToShowSuggestions(false);
+                }
+            }}
+        >
             <SearchHistoryContext.Provider value={searchHistory}>
-                <form onSubmit={onSearchSubmit}>
+                <form onSubmit={onSearch}>
                     <SearchInput
                         value={searchTerm}
                         onChange={searchTerm => setSearchTerm(searchTerm)}
-                        onFocus={() => setIsToShowSuggestions(true)}
-                        onBlur={() => setIsToShowSuggestions(false)}
                     />
                 </form>
                 <Suggestions searchTerm={searchTerm} isToShowSuggestions={isToShowSuggestions} />

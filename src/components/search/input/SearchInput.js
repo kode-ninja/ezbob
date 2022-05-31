@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import {useEffect, useRef} from "react";
 
 
-export const SearchInput = ({value, onChange, onFocus, onBlur}) => {
+export const SearchInput = ({value, onChange}) => {
     const inputRef = useRef();
 
     useEffect(() => {
+        // may use autofocus attribute, but supported only for 80% of current browsers
         inputRef.current.focus();
     }, []);
 
@@ -16,8 +17,6 @@ export const SearchInput = ({value, onChange, onFocus, onBlur}) => {
             type="text"
             value={value}
             onChange={e => onChange(e.target.value)}
-            onFocus={onFocus}
-            onBlur={onBlur}
         />
     );
 }
@@ -25,6 +24,4 @@ export const SearchInput = ({value, onChange, onFocus, onBlur}) => {
 SearchInput.propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    onFocus: PropTypes.func.isRequired,
-    onBlur: PropTypes.func.isRequired,
 };

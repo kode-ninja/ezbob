@@ -6,17 +6,11 @@ const SuggestionRemoveFromHistory = () => {
     const {title} = useContext(SuggestionContext);
     const searchHistory = useContext(SearchHistoryContext);
 
-const onClick = (e) => {
-    e.preventDefault();
-    console.log('ONCLICK');
-    searchHistory.remove(title);
-}
-
     return (
         <div
             title="Remove from history"
             className="remove"
-            onClick={e => onClick(e)}
+            onClick={() => searchHistory.remove(title)}
         >
             Remove
         </div>
