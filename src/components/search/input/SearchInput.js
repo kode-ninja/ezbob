@@ -6,7 +6,8 @@ export const SearchInput = ({value, onChange}) => {
     const inputRef = useRef();
 
     useEffect(() => {
-        // may use autofocus attribute, but supported only for 80% of current browsers
+        // may use autofocus attribute,
+        // but supported only for 80% of current browsers
         inputRef.current.focus();
     }, []);
 
