@@ -5,7 +5,8 @@ const useSearchHistory = () => {
 
     const push = title => {
         console.log('useSearchHistory.push(' + title + ')')
-        setSearchHistory(currHistory => [...currHistory, title]);
+        remove(title);
+        setSearchHistory(currHistory => [title, ...currHistory]);
     }
 
     const remove = title => {
@@ -14,7 +15,7 @@ const useSearchHistory = () => {
     }
 
     const exists = title => {
-        console.log('useSearchHistory.exists(' + title + ')')
+        // console.log('useSearchHistory.exists(' + title + ')')
         return searchHistory.includes(title);
     }
 
