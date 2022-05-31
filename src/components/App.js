@@ -1,10 +1,10 @@
 import '../App.css';
-import AutocompleteInput from "./search/input/AutocompleteInput";
+import SearchPage from "./search/SearchPage";
 
 function App() {
   return (
     <div className="App">
-        <AutocompleteInput />
+        <SearchPage />
     </div>
   );
 }
