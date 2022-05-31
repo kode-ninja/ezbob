@@ -10,7 +10,6 @@ const Suggestions = ({searchTerm, isToHideSuggestions}) => {
     // re-calculation (DB/Server call) if input gains focus again.
     // Memoization depends on the search term - if it doesn't change, no need to re-calculate the suggestions
     const suggestions = useMemo(() => {
-        console.log('Suggestions are being recalculated!'); // TODO: delete
         const dbSuggestions = getSuggestions(searchTerm, MAX_NUM_OF_SUGGESTIONS);
 
         return dbSuggestions.map((suggestion) => <Suggestion key={suggestion.id} title={suggestion.title}/>);
@@ -20,7 +19,7 @@ const Suggestions = ({searchTerm, isToHideSuggestions}) => {
         return null;
 
     return (
-        <div className="suggestions">
+        <div className="suggestions" data-testid="suggestions">
             {suggestions}
         </div>
     )

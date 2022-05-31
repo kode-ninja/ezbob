@@ -13,6 +13,7 @@ export const SearchInput = ({value, onChange}) => {
 
     return (
         <input
+            role="searchbox"
             ref={inputRef}
             className="search"
             type="text"
