@@ -11,13 +11,13 @@ const ACTION_SEARCH_TERM_CHANGED = 'searchTermChanged';
 const reducer = (state, {type, payload}) => {
     switch (type) {
         case ACTION_INPUT_SEARCH_TERM_CHANGED:
-            return {...state, isToShowSuggestions: true, inputSearchTerm: payload.searchTerm};
+            return {...state, isToHideSuggestions: false, inputSearchTerm: payload.searchTerm};
         case ACTION_ON_FOCUS:
-            return {...state, isToShowSuggestions: true};
+            return {...state, isToHideSuggestions: false};
         case ACTION_ON_BLUR:
-            return {...state, isToShowSuggestions: false};
+            return {...state, isToHideSuggestions: true};
         case ACTION_SEARCH_TERM_CHANGED:
-            return {...state, isToShowSuggestions: false, inputSearchTerm: payload.searchTerm};
+            return {...state, isToHideSuggestions: true, inputSearchTerm: payload.searchTerm};
         default:
             throw new Error(`Invalid action type ${type}`);
     }
@@ -37,7 +37,7 @@ const AutocompleteInput = () => {
 
     const initialState = {
         inputSearchTerm: searchTerm,
-        isToShowSuggestions: false
+        isToHideSuggestions: true
     }
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -74,7 +74,7 @@ const AutocompleteInput = () => {
                     onChange={searchTerm => dispatch(createReducerAction(ACTION_INPUT_SEARCH_TERM_CHANGED, {searchTerm: searchTerm}))}
                 />
             </form>
-            <Suggestions searchTerm={state.inputSearchTerm} isToShowSuggestions={state.isToShowSuggestions} />
+            <Suggestions searchTerm={state.inputSearchTerm} isToHideSuggestions={state.isToHideSuggestions} />
         </div>
     );
 }

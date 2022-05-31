@@ -5,7 +5,7 @@ import {useMemo} from "react";
 
 const MAX_NUM_OF_SUGGESTIONS = 10;
 
-const Suggestions = ({searchTerm, isToShowSuggestions}) => {
+const Suggestions = ({searchTerm, isToHideSuggestions}) => {
     // Memoize suggestion calculation to prevent
     // re-calculation (DB/Server call) if input gains focus again.
     // Memoization depends on the search term - if it doesn't change, no need to re-calculate the suggestions
@@ -16,7 +16,7 @@ const Suggestions = ({searchTerm, isToShowSuggestions}) => {
         return dbSuggestions.map((suggestion) => <Suggestion key={suggestion.id} title={suggestion.title}/>);
     }, [searchTerm]);
 
-    if (suggestions.length === 0 || !isToShowSuggestions)
+    if (suggestions.length === 0 || isToHideSuggestions)
         return null;
 
     return (
@@ -28,7 +28,7 @@ const Suggestions = ({searchTerm, isToShowSuggestions}) => {
 
 Suggestions.propTypes = {
     searchTerm: PropTypes.string.isRequired,
-    isToShowSuggestions: PropTypes.bool.isRequired,
+    isToHideSuggestions: PropTypes.bool.isRequired,
 };
 
 export default Suggestions;
