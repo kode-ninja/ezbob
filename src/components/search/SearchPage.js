@@ -12,7 +12,6 @@ const SearchPage = () => {
     const submitSearch = (searchTerm) => {
         searchHistory.push(searchTerm);
         setSearchTerm(searchTerm);
-        // TODO: Close suggestions
     }
 
     const contextValue = {
@@ -21,11 +20,11 @@ const SearchPage = () => {
     };
 
     return (
-        <SearchPageContext.Provider value={contextValue}>
-            <SearchHistoryContext.Provider value={searchHistory}>
+        <SearchHistoryContext.Provider value={searchHistory}>
+            <SearchPageContext.Provider value={contextValue}>
                 <AutocompleteInput />
-            </SearchHistoryContext.Provider>
-        </SearchPageContext.Provider>
+            </SearchPageContext.Provider>
+        </SearchHistoryContext.Provider>
     );
 }
 
