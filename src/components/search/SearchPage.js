@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import AutocompleteInput from "./input/AutocompleteInput";
 import useSearchHistory from "../../history/useSearchHistory";
+import SearchResults from "./results/SearchResults";
 
 export const SearchPageContext = React.createContext(null);
 export const SearchHistoryContext = React.createContext(null);
@@ -20,11 +21,14 @@ const SearchPage = () => {
     };
 
     return (
-        <SearchHistoryContext.Provider value={searchHistory}>
-            <SearchPageContext.Provider value={contextValue}>
-                <AutocompleteInput />
-            </SearchPageContext.Provider>
-        </SearchHistoryContext.Provider>
+        <div className="page search">
+            <SearchHistoryContext.Provider value={searchHistory}>
+                <SearchPageContext.Provider value={contextValue}>
+                    <AutocompleteInput />
+                </SearchPageContext.Provider>
+            </SearchHistoryContext.Provider>
+            <SearchResults searchTerm={searchTerm} />
+        </div>
     );
 }
 
