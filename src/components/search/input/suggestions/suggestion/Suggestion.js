@@ -3,12 +3,14 @@ import React, {useContext} from "react";
 import SuggestionIcon from "./SuggestionIcon";
 import SuggestionTitle from "./SuggestionTitle";
 import SuggestionRemoveFromHistory from "./SuggestionRemoveFromHistory";
-import {SearchHistoryContext} from "../../../SearchPage";
+import {SearchHistoryContext, SearchPageContext} from "../../../SearchPage";
 
 export const SuggestionContext = React.createContext(null);
 
 const Suggestion = ({title}) => {
     const searchHistory = useContext(SearchHistoryContext);
+    const {submitSearch} = useContext(SearchPageContext);
+
     const contextValue = {
         title: title,
         isExistsInSearchHistory: searchHistory.exists(title)
@@ -17,7 +19,10 @@ const Suggestion = ({title}) => {
     return (
         <div className="suggestion">
             <SuggestionContext.Provider value={contextValue}>
-                <SuggestionIcon /><SuggestionTitle /><SuggestionRemoveFromHistory />
+                <span onClick={() => submitSearch(title)}>
+                    <SuggestionIcon /><SuggestionTitle />
+                </span>
+                <SuggestionRemoveFromHistory />
             </SuggestionContext.Provider>
         </div>
     );
