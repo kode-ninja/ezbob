@@ -1,11 +1,24 @@
 import PropTypes from 'prop-types';
-import SuggestionMagnifyingIcon from "./icons/SuggestionMagnifyingIcon";
+import React, {useContext} from "react";
+import SuggestionIcon from "./SuggestionIcon";
 import SuggestionTitle from "./SuggestionTitle";
+import SuggestionRemoveFromHistory from "./SuggestionRemoveFromHistory";
+import {SearchHistoryContext} from "../../AutocompleteInput";
+
+export const SuggestionContext = React.createContext(null);
 
 const Suggestion = ({title}) => {
+    const searchHistory = useContext(SearchHistoryContext);
+    const contextValue = {
+        title: title,
+        isExistsInSearchHistory: searchHistory.exists(title)
+    }
+
     return (
         <div className="suggestion">
-            <SuggestionMagnifyingIcon /><SuggestionTitle title={title} />
+            <SuggestionContext.Provider value={contextValue}>
+                <SuggestionIcon /><SuggestionTitle /><SuggestionRemoveFromHistory />
+            </SuggestionContext.Provider>
         </div>
     );
 }

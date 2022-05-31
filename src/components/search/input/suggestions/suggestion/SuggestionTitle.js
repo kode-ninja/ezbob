@@ -1,20 +1,15 @@
-import PropTypes from 'prop-types';
 import React, {useContext} from "react";
-import {SearchHistoryContext} from "../../AutocompleteInput";
+import {SuggestionContext} from "./Suggestion";
 
-const SuggestionTitle = ({title}) => {
-    const searchHistory = useContext(SearchHistoryContext);
-    const style = searchHistory.exists(title) ? {'color': 'purple'} : {};   // TODO: convert to class
+const SuggestionTitle = () => {
+    const suggestion = useContext(SuggestionContext);
+    const style = suggestion.isExistsInSearchHistory ? {'color': 'purple'} : {};   // TODO: convert to class
 
     return (
         <span style={style}>
-            {title}
+            {suggestion.title}
         </span>
     );
 }
-
-SuggestionTitle.propTypes = {
-    title: PropTypes.string.isRequired,
-};
 
 export default SuggestionTitle;
