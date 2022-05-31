@@ -2,25 +2,44 @@ import PropTypes from 'prop-types';
 import {getSearchResults} from "../../../db/api/getSearchResults";
 import SearchResult from "./result/SearchResult";
 import SearchResultsMetaData from "./SearchResultsMetaData";
+import {useEffect, useRef, useState} from "react";
 
 const SearchResults = ({searchTerm}) => {
-    const start = performance.now();
-    const dbSearchResults = getSearchResults(searchTerm);
-    const executionTimeMS = performance.now() - start;
+    const [searchResults, setSearchResults] = useState([]);
+    const executionTimeMS = useRef(0);
 
-    if (dbSearchResults.length === 0)
+    useEffect(() => {
+        const fetchSearchResults = () => {
+            const start = performance.now();
+            getSearchResults(searchTerm)
+                .then(fetchedSearchResults => {
+                    setSearchResults(fetchedSearchResults);
+                })
+                .catch(e => {
+                   // requirements?
+                   console.error('Failed to fetch search results', e);
+                })
+                .finally(() => {
+                    executionTimeMS.current = performance.now() - start;
+                });
+        }
+        fetchSearchResults();
+    }, [searchTerm]);
+
+
+    if (searchResults.length === 0)
         return null;
 
     return (
         <div className="results">
-            <SearchResultsMetaData executionTimeMS={executionTimeMS} numOfResults={dbSearchResults.length} />
+            <SearchResultsMetaData executionTimeMS={executionTimeMS.current} numOfResults={searchResults.length} />
 
-            {dbSearchResults.map(dbSearchResult =>
+            {searchResults.map(searchResult =>
                 <SearchResult
-                    key={dbSearchResult.id}
-                    description={dbSearchResult.description}
-                    title={dbSearchResult.title}
-                    url={dbSearchResult.url}
+                    key={searchResult.id}
+                    description={searchResult.description}
+                    title={searchResult.title}
+                    url={searchResult.url}
                 />
             )}
         </div>

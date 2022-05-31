@@ -1,4 +1,5 @@
 import {searchResultEntries} from "../entriesDB";
+import {delayedPromise} from "./delayedPromise";
 
 /**
  * Acts as a sort of API for fetching search results suggestions/predictions
@@ -9,7 +10,7 @@ export const getSuggestions = (searchTerm, maxNumOfTitles) => {
     // performance: return no suggestions if searchTerm is an empty string
     // Requirements: trim it, or support/allow a search of <space>?
     if (searchTerm.length === 0)
-        return suggestions;
+        return delayedPromise(suggestions);
 
     for (const resultEntry of searchResultEntries) {
         if (resultEntry.title.toLowerCase().startsWith(searchTerm.toLowerCase())) { // case-insensitive comparison
@@ -18,9 +19,9 @@ export const getSuggestions = (searchTerm, maxNumOfTitles) => {
                 title: resultEntry.title.toLowerCase()  // assuming suggestions should be lowercase, as displayed in the requirement doc
             });
             if (suggestions.length === maxNumOfTitles)
-                return suggestions;
+                break;
         }
     }
 
-    return suggestions;
+    return delayedPromise(suggestions);
 }

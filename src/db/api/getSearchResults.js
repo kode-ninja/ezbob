@@ -1,4 +1,5 @@
 import {searchResultEntries} from "../entriesDB";
+import {delayedPromise} from "./delayedPromise";
 
 
 /**
@@ -6,7 +7,7 @@ import {searchResultEntries} from "../entriesDB";
  */
 export const getSearchResults = (searchTerm) => {
     if (searchTerm.length === 0)
-        return [];
+        return delayedPromise([]);
 
-    return searchResultEntries.filter(resultEntry => resultEntry.title.toLowerCase().includes(searchTerm.toLowerCase()));
+    return delayedPromise(searchResultEntries.filter(resultEntry => resultEntry.title.toLowerCase().includes(searchTerm.toLowerCase())));
 }

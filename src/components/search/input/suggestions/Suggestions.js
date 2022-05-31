@@ -1,18 +1,26 @@
 import PropTypes from 'prop-types';
 import Suggestion from "./suggestion/Suggestion";
 import {getSuggestions} from "../../../../db/api/getSuggestions";
-import {useMemo} from "react";
+import {useEffect, useState} from "react";
 
 const MAX_NUM_OF_SUGGESTIONS = 10;
 
 const Suggestions = ({searchTerm, isToHideSuggestions}) => {
-    // Memoize suggestion calculation to prevent
-    // re-calculation (DB/Server call) if input gains focus again.
-    // Memoization depends on the search term - if it doesn't change, no need to re-calculate the suggestions
-    const suggestions = useMemo(() => {
-        const dbSuggestions = getSuggestions(searchTerm, MAX_NUM_OF_SUGGESTIONS);
+    const [suggestions, setSuggestions] = useState([]);
 
-        return dbSuggestions.map((suggestion) => <Suggestion key={suggestion.id} title={suggestion.title}/>);
+    useEffect(() => {
+        const fetchSuggestions = () => {
+            getSuggestions(searchTerm, MAX_NUM_OF_SUGGESTIONS)
+            .then((fetchedSuggestions) => {
+                setSuggestions(fetchedSuggestions);
+            })
+            .catch(e => {
+                // requirements?
+                console.error('Failed to fetch suggestions', e);
+            });
+        }
+
+        fetchSuggestions();
     }, [searchTerm]);
 
     if (suggestions.length === 0 || isToHideSuggestions)
@@ -20,7 +28,7 @@ const Suggestions = ({searchTerm, isToHideSuggestions}) => {
 
     return (
         <div className="suggestions" data-testid="suggestions">
-            {suggestions}
+            {suggestions.map((suggestion) => <Suggestion key={suggestion.id} title={suggestion.title}/>)}
         </div>
     )
 }
