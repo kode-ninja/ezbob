@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import {SearchHistoryContext} from "../../AutocompleteInput";
 import {SuggestionContext} from "./Suggestion";
+import {SearchHistoryContext} from "../../../SearchPage";
 
 const SuggestionRemoveFromHistory = () => {
     const {title} = useContext(SuggestionContext);

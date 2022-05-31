@@ -1,18 +1,17 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {SearchInput} from "./SearchInput";
 import Suggestions from "./suggestions/Suggestions";
-import useSearchHistory from "../../../history/useSearchHistory";
+import {SearchPageContext} from "../SearchPage";
 
-export const SearchHistoryContext = React.createContext(null);
 
 const AutocompleteInput = () => {
-    const [inputSearchTerm, setInputSearchTerm] = useState('');
-    const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
-    const searchHistory = useSearchHistory();
+    const {searchTerm, submitSearch} = useContext(SearchPageContext);
+    const [inputSearchTerm, setInputSearchTerm] = useState(searchTerm);
+    const [isToShowSuggestions, setIsToShowSuggestions] = useState(false);
 
-    const onSearch = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        searchHistory.push(inputSearchTerm);
+        submitSearch(inputSearchTerm);
     }
 
     return (
@@ -37,15 +36,13 @@ const AutocompleteInput = () => {
                 }
             }}
         >
-            <SearchHistoryContext.Provider value={searchHistory}>
-                <form onSubmit={onSearch}>
-                    <SearchInput
-                        value={inputSearchTerm}
-                        onChange={searchTerm => setInputSearchTerm(searchTerm)}
-                    />
-                </form>
-                <Suggestions searchTerm={inputSearchTerm} isToShowSuggestions={isToShowSuggestions} />
-            </SearchHistoryContext.Provider>
+            <form onSubmit={onSubmit}>
+                <SearchInput
+                    value={inputSearchTerm}
+                    onChange={searchTerm => setInputSearchTerm(searchTerm)}
+                />
+            </form>
+            <Suggestions searchTerm={inputSearchTerm} isToShowSuggestions={isToShowSuggestions} />
         </div>
     );
 }

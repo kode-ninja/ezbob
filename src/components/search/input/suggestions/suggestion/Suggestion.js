@@ -3,7 +3,7 @@ import React, {useContext} from "react";
 import SuggestionIcon from "./SuggestionIcon";
 import SuggestionTitle from "./SuggestionTitle";
 import SuggestionRemoveFromHistory from "./SuggestionRemoveFromHistory";
-import {SearchHistoryContext} from "../../AutocompleteInput";
+import {SearchHistoryContext} from "../../../SearchPage";
 
 export const SuggestionContext = React.createContext(null);
 
