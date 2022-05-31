@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+
+test('input is empty on page load and has focus', async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const inputElement = await screen.findByRole("searchbox");
+  expect(inputElement).toHaveFocus();
+  expect(inputElement).toHaveValue('');
 });
