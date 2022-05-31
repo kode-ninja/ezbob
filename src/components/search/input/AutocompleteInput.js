@@ -6,13 +6,13 @@ import useSearchHistory from "../../../history/useSearchHistory";
 export const SearchHistoryContext = React.createContext(null);
 
 const AutocompleteInput = () => {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [inputSearchTerm, setInputSearchTerm] = useState('');
     const [isToShowSuggestions, setIsToShowSuggestions] = useState(true);
     const searchHistory = useSearchHistory();
 
     const onSearch = (e) => {
         e.preventDefault();
-        searchHistory.push(searchTerm);
+        searchHistory.push(inputSearchTerm);
     }
 
     return (
@@ -27,14 +27,12 @@ const AutocompleteInput = () => {
             onFocus={(e) => {
                 if (!e.currentTarget.contains(e.relatedTarget)) {
                     // Not triggered when swapping focus between children
-                    console.log('focus entered self');
                     setIsToShowSuggestions(true);
                 }
             }}
             onBlur={(e) => {
                 if (!e.currentTarget.contains(e.relatedTarget)) {
                     // Not triggered when swapping focus between children
-                    console.log('focus left self');
                     setIsToShowSuggestions(false);
                 }
             }}
@@ -42,11 +40,11 @@ const AutocompleteInput = () => {
             <SearchHistoryContext.Provider value={searchHistory}>
                 <form onSubmit={onSearch}>
                     <SearchInput
-                        value={searchTerm}
-                        onChange={searchTerm => setSearchTerm(searchTerm)}
+                        value={inputSearchTerm}
+                        onChange={searchTerm => setInputSearchTerm(searchTerm)}
                     />
                 </form>
-                <Suggestions searchTerm={searchTerm} isToShowSuggestions={isToShowSuggestions} />
+                <Suggestions searchTerm={inputSearchTerm} isToShowSuggestions={isToShowSuggestions} />
             </SearchHistoryContext.Provider>
         </div>
     );
